@@ -57,12 +57,17 @@
 
             function calculate() {
               var ratio = (calcSize * newlines) / domElem.offsetWidth / newlines;
-              return Math.max(
-                Math.min(((parent[0].offsetWidth - (parseFloat(getComputedStyle(parent[0]).paddingLeft) + parseFloat(getComputedStyle(parent[0]).paddingRight))) - 6) * ratio * compressor,
-                  parseFloat(maxFontSize)
+
+              return Math.min(
+                Math.max(
+                  Math.min(
+                    ((parent[0].offsetWidth - (parseFloat(getComputedStyle(parent[0]).paddingLeft) + parseFloat(getComputedStyle(parent[0]).paddingRight))) - 6) * ratio * compressor,
+                    parseFloat(maxFontSize)
+                  ),
+                  parseFloat(minFontSize)
                 ),
-                parseFloat(minFontSize)
-              )
+                parent[0].offsetHeight
+              );
             }
 
             function resize() {
